@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Day & Night Cycle</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        overflow: hidden;
+        font-family: "Arial", sans-serif;
+      }
+
+      .container {
+        width: 100vw;
+        height: 100vh;
+        position: relative;
+        background: linear-gradient(to bottom, #0a0e27 0%, #1a1f3a 100%);
+        animation: skyChange 20s infinite;
+      }
+
+      @keyframes skyChange {
+        0% {
+          background: linear-gradient(to bottom, #0a0e27 0%, #1a1f3a 100%);
+        }
+        12.5% {
+          background: linear-gradient(
+            to bottom,
+            #ff6b35 0%,
+            #f7931e 50%,
+            #ffd93d 100%
+          );
+        }
+        25% {
+          background: linear-gradient(
+            to bottom,
+            #87ceeb 0%,
+            #98d8e8 50%,
+            #ffd700 100%
+          );
+        }
+        37.5% {
+          background: linear-gradient(
+            to bottom,
+            #87ceeb 0%,
+            #98d8e8 50%,
+            #ffd700 100%
+          );
+        }
+        50% {
+          background: linear-gradient(
+            to bottom,
+            #ff6b35 0%,
+            #ff4757 50%,
+            #2c003e 100%
+          );
+        }
+        62.5% {
+          background: linear-gradient(to bottom, #0a0e27 0%, #1a1f3a 100%);
+        }
+        100% {
+          background: linear-gradient(to bottom, #0a0e27 0%, #1a1f3a 100%);
+        }
+      }
+
+      .sun {
+        width: 120px;
+        height: 120px;
+        background: radial-gradient(circle, #ffeb3b 0%, #ff9800 100%);
+        border-radius: 50%;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        box-shadow: 0 0 60px #ffeb3b, 0 0 100px #ff9800;
+        animation: sunCycle 20s infinite;
+      }
+
+      @keyframes sunCycle {
+        0% {
+          bottom: -150px;
+          opacity: 0;
+        }
+        12.5% {
+          bottom: 20%;
+          opacity: 1;
+        }
+        25% {
+          bottom: 70%;
+          opacity: 1;
+        }
+        37.5% {
+          bottom: 20%;
+          opacity: 1;
+        }
+        50% {
+          bottom: -150px;
+          opacity: 0;
+        }
+        100% {
+          bottom: -150px;
+          opacity: 0;
+        }
+      }
+
+      .sun::before {
+        content: "";
+        position: absolute;
+        width: 140px;
+        height: 140px;
+        border: 3px solid rgba(255, 235, 59, 0.3);
+        border-radius: 50%;
+        top: -10px;
+        left: -10px;
+        animation: sunPulse 3s infinite;
+      }
+
+      @keyframes sunPulse {
+        0%,
+        100% {
+          transform: scale(1);
+          opacity: 0.5;
+        }
+        50% {
+          transform: scale(1.2);
+          opacity: 0;
+        }
+      }
+
+      .moon {
+        width: 100px;
+        height: 100px;
+        background: radial-gradient(
+          circle at 30% 30%,
+          #f4f4f4 0%,
+          #d3d3d3 100%
+        );
+        border-radius: 50%;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        box-shadow: 0 0 40px rgba(244, 244, 244, 0.6),
+          0 0 80px rgba(244, 244, 244, 0.3);
+        animation: moonCycle 20s infinite;
+      }
+
+      @keyframes moonCycle {
+        0% {
+          bottom: -150px;
+          opacity: 0;
+        }
+        50% {
+          bottom: -150px;
+          opacity: 0;
+        }
+        62.5% {
+          bottom: 20%;
+          opacity: 1;
+        }
+        75% {
+          bottom: 70%;
+          opacity: 1;
+        }
+        87.5% {
+          bottom: 20%;
+          opacity: 1;
+        }
+        100% {
+          bottom: -150px;
+          opacity: 0;
+        }
+      }
+
+      .moon::before {
+        content: "";
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background: rgba(169, 169, 169, 0.4);
+        border-radius: 50%;
+        top: 20px;
+        left: 25px;
+      }
+
+      .moon::after {
+        content: "";
+        position: absolute;
+        width: 15px;
+        height: 15px;
+        background: rgba(169, 169, 169, 0.3);
+        border-radius: 50%;
+        top: 50px;
+        left: 50px;
+      }
+
+      .stars {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+      }
+
+      .star {
+        position: absolute;
+        background: white;
+        border-radius: 50%;
+        animation: starTwinkle 3s infinite alternate;
+      }
+
+      @keyframes starTwinkle {
+        0%,
+        100% {
+          opacity: 0;
+        }
+        50%,
+        100% {
+          opacity: 1;
+        }
+      }
+
+      .star:nth-child(1) {
+        width: 2px;
+        height: 2px;
+        top: 20%;
+        left: 15%;
+        animation-delay: 0s;
+      }
+      .star:nth-child(2) {
+        width: 3px;
+        height: 3px;
+        top: 15%;
+        left: 75%;
+        animation-delay: 0.5s;
+      }
+      .star:nth-child(3) {
+        width: 2px;
+        height: 2px;
+        top: 35%;
+        left: 25%;
+        animation-delay: 1s;
+      }
+      .star:nth-child(4) {
+        width: 3px;
+        height: 3px;
+        top: 40%;
+        left: 85%;
+        animation-delay: 1.5s;
+      }
+      .star:nth-child(5) {
+        width: 2px;
+        height: 2px;
+        top: 25%;
+        left: 45%;
+        animation-delay: 2s;
+      }
+      .star:nth-child(6) {
+        width: 3px;
+        height: 3px;
+        top: 10%;
+        left: 55%;
+        animation-delay: 0.8s;
+      }
+      .star:nth-child(7) {
+        width: 2px;
+        height: 2px;
+        top: 30%;
+        left: 90%;
+        animation-delay: 1.2s;
+      }
+      .star:nth-child(8) {
+        width: 3px;
+        height: 3px;
+        top: 45%;
+        left: 10%;
+        animation-delay: 1.8s;
+      }
+
+      .mountains {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 300px;
+      }
+
+      .mountain {
+        position: absolute;
+        bottom: 0;
+        border-left: 200px solid transparent;
+        border-right: 200px solid transparent;
+        border-bottom: 300px solid #2d3e50;
+      }
+
+      .mountain:nth-child(1) {
+        left: -100px;
+        filter: brightness(0.7);
+      }
+
+      .mountain:nth-child(2) {
+        left: 200px;
+        border-left-width: 250px;
+        border-right-width: 250px;
+        border-bottom-width: 350px;
+        border-bottom-color: #1a252f;
+      }
+
+      .mountain:nth-child(3) {
+        right: -50px;
+        filter: brightness(0.8);
+      }
+
+      .ground {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 100px;
+        background: linear-gradient(to bottom, #2d5016 0%, #1a3d0a 100%);
+      }
+
+      .info {
+        position: absolute;
+        top: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: white;
+        text-align: center;
+        font-size: 24px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        z-index: 100;
+        animation: infoChange 20s infinite;
+      }
+
+      @keyframes infoChange {
+        0% {
+          content: "Night";
+        }
+        12.5% {
+          content: "Sunrise";
+        }
+        25% {
+          content: "Day";
+        }
+        37.5% {
+          content: "Sunset";
+        }
+        50% {
+          content: "Dusk";
+        }
+        62.5% {
+          content: "Moonrise";
+        }
+        75% {
+          content: "Night";
+        }
+        87.5% {
+          content: "Moonset";
+        }
+      }
+
+      .clouds {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        animation: cloudsOpacity 20s infinite;
+      }
+
+      @keyframes cloudsOpacity {
+        0%,
+        50%,
+        100% {
+          opacity: 0;
+        }
+        25%,
+        37.5% {
+          opacity: 1;
+        }
+      }
+
+      .cloud {
+        position: absolute;
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 100px;
+        animation: cloudFloat 30s infinite linear;
+      }
+
+      @keyframes cloudFloat {
+        0% {
+          left: -200px;
+        }
+        100% {
+          left: 100%;
+        }
+      }
+
+      .cloud::before,
+      .cloud::after {
+        content: "";
+        position: absolute;
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 100px;
+      }
+
+      .cloud:nth-child(1) {
+        width: 100px;
+        height: 40px;
+        top: 20%;
+        animation-duration: 35s;
+      }
+
+      .cloud:nth-child(1)::before {
+        width: 50px;
+        height: 50px;
+        top: -25px;
+        left: 10px;
+      }
+
+      .cloud:nth-child(1)::after {
+        width: 60px;
+        height: 40px;
+        top: -20px;
+        right: 10px;
+      }
+
+      .cloud:nth-child(2) {
+        width: 120px;
+        height: 50px;
+        top: 35%;
+        animation-duration: 40s;
+        animation-delay: -10s;
+      }
+
+      .cloud:nth-child(2)::before {
+        width: 60px;
+        height: 60px;
+        top: -30px;
+        left: 15px;
+      }
+
+      .cloud:nth-child(2)::after {
+        width: 70px;
+        height: 50px;
+        top: -25px;
+        right: 15px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="info" id="timeInfo">Night</div>
+
+      <div class="stars">
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+      </div>
+
+      <div class="clouds">
+        <div class="cloud"></div>
+        <div class="cloud"></div>
+      </div>
+
+      <div class="sun"></div>
+      <div class="moon"></div>
+
+      <div class="mountains">
+        <div class="mountain"></div>
+        <div class="mountain"></div>
+        <div class="mountain"></div>
+      </div>
+
+      <div class="ground"></div>
+    </div>
+
+    <script>
+      const phases = [
+        "Night",
+        "Sunrise",
+        "Day",
+        "Sunset",
+        "Dusk",
+        "Moonrise",
+        "Night",
+        "Moonset",
+      ];
+      const infoEl = document.getElementById("timeInfo");
+      const cycleDuration = 20000;
+      const phaseDuration = cycleDuration / 8;
+
+      let currentPhase = 0;
+
+      setInterval(() => {
+        currentPhase = (currentPhase + 1) % phases.length;
+        infoEl.textContent = phases[currentPhase];
+      }, phaseDuration);
+    </script>
+  </body>
+</html>

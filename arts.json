@@ -530,7 +530,7 @@
    {
     "file": "greetings.html",
     "title": "Greetings",
-    "author": "CristiCode"
+    "author": "CristiCode"},
   {
     "file": "jenil-northernlight.html",
     "title": "Northern Light",
@@ -592,7 +592,11 @@
     "file":"Commits_Grid_text.html",
     "title":"Grid text",
     "author":"Debosmita"
+  },
+  {
+    "file":"shakti177-daynightcycle.html",
+    "title":"Day Night Cycle",
+    "author":"Shakti Tamrakar"
   }
-    
 ]
 
